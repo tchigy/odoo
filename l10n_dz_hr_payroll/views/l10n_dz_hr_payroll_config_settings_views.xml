@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
 
      <record id="view_hr_payroll_configuration_l10n_dz_payroll" model="ir.ui.view">
             <field name="name">Configure Payroll l10n_dz_payroll</field>
@@ -29,4 +30,6 @@
                     </xpath>
             </field>
         </record>
+
+    </data>
 </odoo>

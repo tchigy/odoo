@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
 
         <!-- HR Employee Form -->
         <record id="view_employee_form_inherit_l10n_dz_payroll" model="ir.ui.view">
@@ -179,5 +180,5 @@
             </field>
         </record>
 
-
+    </data>
 </odoo>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+    <data>
         <!-- Decimal Precision -->
         <record id="hr_payroll.decimal_payroll" model="decimal.precision">
             <field name="digits">8</field>
@@ -117,7 +117,7 @@
                     <record id="retenue_irg_10_cot" model="hr.salary.rule.category">
                         <field name="name">Retenue IRG 10% COT </field>
                         <field name="code">CIRG10</field>
-                        <field name="parent_id" ref="base_irg10"/>
+                        <field name="parent_id" ref="hr_payroll.DED"/>
                     </record>
                             <!-- Les Rubriques Imposables et non cotisables dont un IRG 10%
                             Je cumul dans base_irg10-->
@@ -128,7 +128,7 @@
                             </record>
                                     <record id="C_IMP_G_IRG10" model="hr.salary.rule.category">
                                         <field name="name">Cumul Imposable IRG 10% (+)</field>
-                                        <field name="code">C_COT_G_IRG10</field>
+                                        <field name="code">C_IMP_G_IRG10</field>
                                         <field name="parent_id" ref="base_irg_10_imp"/>
                                     </record>
                                     <record id="C_IMP_R_IRG10" model="hr.salary.rule.category">
@@ -141,7 +141,7 @@
                             <record id="base_irg_10_cot" model="hr.salary.rule.category">
                                 <field name="name">Base IRG 10% COT </field>
                                 <field name="code">BIRG10</field>
-                                <field name="parent_id" ref="hr_payroll.ALW"/>
+                                <field name="parent_id" ref="base_irg10"/>
                             </record>
                                 <!-- IRG10 Cotisabable-->
                                 <record id="C_COT_G_IRG10" model="hr.salary.rule.category">
@@ -714,7 +714,7 @@
         <field name="sequence">599</field>
         <field name="appears_on_payslip" eval="False"/>
     	<field name="amount_select">code</field>
-        <field name="amount_python_compute">result=(categories.T_COT_G + categories.T_COT_R + categories.BIRG10) + (categories.SALA + categories.CIRG10)</field>
+        <field name="amount_python_compute">result=(categories.T_COT_G + categories.T_COT_R + categories.BIRG10)</field>
     </record>
 
     <!-- Panier-->
@@ -778,9 +778,9 @@
         <field name="code">R690</field>
         <field name="sequence">690</field>
         <field name="condition_select">python</field>
-        <field name="condition_python">resulta= (categories.base_irg10) !=0</field>
+        <field name="condition_python">result= (categories.base_irg10) !=0</field>
         <field name="amount_select">percentage</field>
-        <field name="quantity">-(categories.base_irg10)</field>
+        <field name="quantity">-(categories.base_irg10 + categories.CIRG10)</field>
         <field name="amount_percentage_base">(10/100.0)</field>
         <field name="amount_percentage" eval="100"/>
         <field name="register_id" ref="hr_irg_register"/>
@@ -899,4 +899,5 @@
         <field name="parent_id" ref="hr_payroll_salary_structure_all"/>
     </record>
 
+    </data>
 </odoo>

@@ -20,6 +20,22 @@ _logger = logging.getLogger(__name__)
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
+    @api.multi
+    def compute_sheet(self):	
+ 	payslip_line_obj = self.env['hr.payslip.line']
+        for payslip in self:
+            number = payslip.number or self.env['ir.sequence'].next_by_code('salary.slip')
+            #delete old payslip lines
+	    line = payslip_line_obj.search([('slip_id','=', payslip.id)])
+            line.unlink()
+            # set the list of contract for which the rules have to be applied
+            # if we don't give the contract, then the rules to apply should be for all current contracts of the employee
+            contract_ids = payslip.contract_id.ids or \
+                self.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
+            lines = [(0, 0, line) for line in self.get_payslip_lines(contract_ids, payslip.id)]
+            payslip.write({'line_ids': lines, 'number': number})
+        return True
+
     @api.model
     def get_worked_day_lines(self, contract_ids, date_from, date_to):
         res = super(HrPayslip, self).get_worked_day_lines(contract_ids, date_from, date_to)
