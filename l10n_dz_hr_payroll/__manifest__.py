@@ -5,7 +5,7 @@
 
 {
     'name': 'Algeria - Payroll',
-    'version': '0.2',
+    'version': '0.3',
     'category': 'Localization',
     'description': """
 This is the module to manage Algeria payslip in Odoo.
@@ -28,9 +28,9 @@ http://www.slideshare.net/yacinebensidhoum/paie-algrienne-odoo
 
         'security/ir.model.access.csv',
         'data/l10n_dz_hr_payroll_data.xml',
-	    'views/l10n_dz_hr_payroll_config_settings_views.xml',
-	    'views/hr_employee_view.xml',
-	    'views/hr_payroll_view.xml',
+    	'views/l10n_dz_hr_payroll_config_settings_views.xml',
+    	'views/hr_empolyee_view.xml',
+    	'views/hr_payroll_view.xml',
         'report/report_l10ndzfichepaye.xml',
         'report/l10n_dz_hr_payroll_report.xml',
 	'reports/hr_payslip_report_view.xml',

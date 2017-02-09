@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+    <data>
         <!-- Commune -->
         <record id="view_commune_tree" model="ir.ui.view">
             <field name="name">res.commune.tree</field>
@@ -51,4 +51,6 @@
                    
             </field>
         </record>
+
+    </data>
 </odoo>

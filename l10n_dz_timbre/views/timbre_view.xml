@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>	
-
+    <data>
 	<!--Timbre: Form-->
 	<record id="config_timbre_form" model="ir.ui.view" >
           <field name="name">config.timbre.form</field>
@@ -62,4 +62,5 @@
     <menuitem action="action_timbre" id="menu_timbre" parent="account.account_account_menu"
               groups="base.group_no_one" sequence="90"/>
 
+    </data>
 </odoo>
