@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-#
-# Copyright (c) 2016  - Osis - www.osis-dz.net
+# Copyright (c) 2016  - Osis - www.osis.dz
 
 {
     'name': 'Algeria - Payroll',
     'version': '0.4',
+    'license': 'AGPL-3',
     'category': 'Localization',
     'description': """
 This is the module to manage Algeria payslip in Odoo.
@@ -22,7 +22,7 @@ http://www.slideshare.net/yacinebensidhoum/paie-algrienne-odoo
 **Email:** contact@osis.dz
 """,
     'author': 'Osis',
-    'website': 'http://www.osis-dz.net/',
+    'website': 'http://www.osis.dz/',
     'depends': ['hr_payroll', 'l10n_dz', 'smile_decimal_precision'],
     'data': [
 
