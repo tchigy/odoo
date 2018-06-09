@@ -13,9 +13,14 @@ from odoo import api, fields, models, tools, _
 from odoo.tools.safe_eval import safe_eval
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons import decimal_precision as dp
+import math
 
 _logger = logging.getLogger(__name__)
 
+def round_amount(amount):
+    tt= math.floor(amount*1000.0)/1000.0
+    tt = round(tt,2)
+    return tt
 
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
@@ -52,10 +57,12 @@ class HrPayslip(models.Model):
     @api.one
     @api.depends('line_ids.total')
     def _compute_net(self):
-        self.net = sum(line.total for line in self.line_ids if line.code<>'R999' )
+        self.net = sum(line.total for line in self.line_ids if line.code == 'R999')
 
     net = fields.Float(string='Net à payer',
         store=True, readonly=True, compute='_compute_net', digits=dp.get_precision('Payroll'))
+    line_ids = fields.One2many('hr.payslip.line', 'slip_id', string='Payslip Lines', readonly=True,
+        states={'draft': [('readonly', False)]}, domain=[('appears_on_payslip','=', True),('total','!=',0)])
 
 
 class HrPayslipLine(models.Model):
@@ -65,7 +72,7 @@ class HrPayslipLine(models.Model):
     def _compute_total(self):
         for line in self:
             total = float(line.quantity) * line.amount * line.rate / 100
-            line.total = decimal.Decimal(total).quantize(decimal.Decimal('.1'), rounding=decimal.ROUND_UP)
+            line.total = round_amount(total)
 
 class HrSalaryRule(models.Model):
     _inherit = 'hr.salary.rule'

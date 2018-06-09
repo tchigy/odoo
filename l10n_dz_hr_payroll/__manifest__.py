@@ -5,7 +5,7 @@
 
 {
     'name': 'Algeria - Payroll',
-    'version': '0.3',
+    'version': '0.4',
     'category': 'Localization',
     'description': """
 This is the module to manage Algeria payslip in Odoo.
