@@ -31,10 +31,11 @@ class HrIrg(models.Model):
 	       taux=0.0
 	       impan=0.0
 	       trs=120000.0  
-		
+	
+	    # NO more IRG for this category
 	    elif brts <= 360000.0:
-	       taux=20.0
-	       impan=48000.0
+	       taux=0.0
+	       impan=0.0
 	       trs=360000.0  
 
 	    elif brts <= 1440000.0:
@@ -69,6 +70,10 @@ class HrIrg(models.Model):
 	    rts1=(rts1*10.0) + 0.0001
 	    rts1=int(rts1)
 	    rts1=rts1/10.0
+	    
+	    # Calcule de réduction d'IRG pour category entre 30000 et 35000
+            if 30000.0 < soumis < 35000.0:
+                rts1 = math.ceil(rts1 * (8.0 / 3.0) - (20000.0 / 3.0))
 
 	    return -rts1
 
